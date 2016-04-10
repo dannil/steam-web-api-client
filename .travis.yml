@@ -1,0 +1,24 @@
+language: java
+jdk:
+- oraclejdk8
+- oraclejdk7
+os:
+- linux
+branches:
+  only:
+  - master
+  - dev
+  - coverity_scan
+  
+sudo: required
+  
+after_success:
+  - mvn jacoco:report
+  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+  - sudo sh jpmInstall.sh
+  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+  - codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
+  
+env:
+  global:
+    secure: ofEkkHQ6uRC4PLKYV2UocHPmgpbdZIyX2HUglenQOXzkT4RUA39t3XBJxDEKYe95U1UfPOo1kLaAmVvnQcfmIsm/vB9xet8PNTODowKltMhNcK5oyy58iGkwR/Klep4b0mWYUh3w39LdgnOzQ6nra3Hap7B4bMZ8bPNiVLxp4/A=
