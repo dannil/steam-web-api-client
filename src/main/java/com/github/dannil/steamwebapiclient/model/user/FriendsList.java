@@ -1,7 +1,9 @@
-package com.github.dannil.steamwebapiclient.model;
+package com.github.dannil.steamwebapiclient.model.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.github.dannil.steamwebapiclient.model.user.Friend;
 
 public class FriendsList {
 

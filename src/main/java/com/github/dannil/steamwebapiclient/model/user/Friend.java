@@ -1,4 +1,4 @@
-package com.github.dannil.steamwebapiclient.model;
+package com.github.dannil.steamwebapiclient.model.user;
 
 import java.util.Date;
 
