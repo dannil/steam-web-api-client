@@ -7,8 +7,8 @@
 	<packaging>jar</packaging>
 
 	<name>steam-web-api-client</name>
-<!-- 	<description>Java client for the SCB (Statistiska centralbyrån) API</description> -->
-<!-- 	<url>https://github.com/dannil/scb-java-client</url> -->
+	<description>Java client for the Steam Web API</description>
+	<url>https://github.com/dannil/steam-web-api-client</url>
 
 	<developers>
 		<developer>
@@ -68,11 +68,18 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson-databind.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.httpcomponents</groupId> -->
-<!-- 			<artifactId>httpclient</artifactId> -->
-<!-- 			<version>4.5.2</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client</artifactId>
+			<version>1.21.0</version>
+		</dependency>
+
 
 		<!-- Test dependencies -->
 <!-- 		<dependency> -->
