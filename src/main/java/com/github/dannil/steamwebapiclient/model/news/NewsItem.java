@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.dannil.steamwebapiclient.utility.UnixTimestampDeserializer;
 
-public class NewsItems {
+public class NewsItem {
 
 	private long gid;
 	private String title;
@@ -27,7 +27,7 @@ public class NewsItems {
 	@JsonProperty("feedname")
 	private String feedName;
 
-	public NewsItems() {
+	public NewsItem() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -106,7 +106,7 @@ public class NewsItems {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("NewsItems [gid=");
+		builder.append("NewsItem [gid=");
 		builder.append(this.gid);
 		builder.append(", title=");
 		builder.append(this.title);

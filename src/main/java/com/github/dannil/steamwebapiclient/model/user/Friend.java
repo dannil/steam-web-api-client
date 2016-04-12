@@ -14,6 +14,7 @@ public class Friend {
 	private String relationship;
 
 	@JsonProperty("friend_since")
+	// @JsonSerialize(using = UnixTimestampSerializer.class)
 	@JsonDeserialize(using = UnixTimestampDeserializer.class)
 	private Date friendSince;
 

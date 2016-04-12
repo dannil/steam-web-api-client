@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 public class UnixTimestampDeserializer extends JsonDeserializer<Date> {
-	// Logger logger = LoggerFactory.getLogger(UnixTimestampDeserializer.class)
 
 	@Override
 	public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException,

@@ -18,7 +18,9 @@ package com.github.dannil.steamwebapiclient.utility;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dannil.steamwebapiclient.exception.SteamWebAPIClientException;
@@ -38,18 +40,39 @@ public class JsonUtility {
 
 	}
 
-	public static <T> T convertValue(String json, Class<T> clazz) {
+	private static JsonNode readTree(String json) {
 		try {
-			JsonNode node = mapper.readTree(json);
-
-			Iterator<String> it = node.fieldNames();
-			String first = it.next();
-
-			node = node.get(first);
-			return mapper.convertValue(node, clazz);
+			return mapper.readTree(json);
 		} catch (IOException e) {
 			throw new SteamWebAPIClientException(e);
 		}
+	}
+
+	public static <T> T convertValue(String json, Class<T> clazz) {
+		JsonNode node = readTree(json);
+
+		Iterator<String> it = node.fieldNames();
+		String first = it.next();
+
+		node = node.get(first);
+
+		return mapper.convertValue(node, clazz);
+	}
+
+	public static <T> List<T> convertValueToList(String json, Class<T> clazz) {
+		JsonNode node = readTree(json);
+
+		Iterator<String> it = node.fieldNames();
+		String first = it.next();
+		node = node.get(first);
+
+		it = node.fieldNames();
+		String second = it.next();
+		node = node.get(second);
+
+		JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
+
+		return mapper.convertValue(node, type);
 	}
 
 }

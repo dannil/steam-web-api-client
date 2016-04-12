@@ -11,10 +11,10 @@ public class AppNews {
 	private int appId;
 
 	@JsonProperty("newsitems")
-	private List<NewsItems> newsItems;
+	private List<NewsItem> newsItem;
 
 	public AppNews() {
-		this.newsItems = new ArrayList<NewsItems>();
+		this.newsItem = new ArrayList<NewsItem>();
 	}
 
 	@Override
@@ -22,8 +22,8 @@ public class AppNews {
 		StringBuilder builder = new StringBuilder();
 		builder.append("AppNews [appId=");
 		builder.append(this.appId);
-		builder.append(", newsItems=");
-		builder.append(this.newsItems);
+		builder.append(", newsItem=");
+		builder.append(this.newsItem);
 		builder.append("]");
 		return builder.toString();
 	}
