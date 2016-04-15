@@ -1,6 +1,6 @@
 package com.github.dannil.steamwebapiclient.model.userstats;
 
-public class Achievement {
+public class Achievements {
 
 	private String name;
 	private double percent;
@@ -24,7 +24,7 @@ public class Achievement {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Achievement [name=");
+		builder.append("Achievements [name=");
 		builder.append(this.name);
 		builder.append(", percent=");
 		builder.append(this.percent);

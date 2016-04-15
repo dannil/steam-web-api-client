@@ -13,7 +13,8 @@ import com.github.dannil.steamwebapiclient.exception.SteamWebAPIClientException;
 import com.github.dannil.steamwebapiclient.model.news.AppNews;
 import com.github.dannil.steamwebapiclient.model.user.Friend;
 import com.github.dannil.steamwebapiclient.model.user.Player;
-import com.github.dannil.steamwebapiclient.model.userstats.Achievement;
+import com.github.dannil.steamwebapiclient.model.userstats.Achievements;
+import com.github.dannil.steamwebapiclient.model.userstats.PlayerStats;
 import com.github.dannil.steamwebapiclient.utility.HttpClient;
 import com.github.dannil.steamwebapiclient.utility.JsonUtility;
 
@@ -49,7 +50,7 @@ public class SteamWebAPIClient {
 		return utility.convertValue(response, AppNews.class);
 	}
 
-	public List<Achievement> getGlobalAchievementPercentagesForApp(Integer gameId) throws SteamWebAPIClientException {
+	public List<Achievements> getGlobalAchievementPercentagesForApp(Integer gameId) throws SteamWebAPIClientException {
 		String interfaceUrl = createEndpointUrl("ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/");
 
 		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
@@ -58,7 +59,7 @@ public class SteamWebAPIClient {
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
 
 		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CASE);
-		return utility.convertValueToList(response, 2, Achievement.class);
+		return utility.convertValueToList(response, 2, Achievements.class);
 	}
 
 	// public List<GlobalStats> getGlobalStatsForGame(Integer appId, Integer count, String name,
@@ -103,6 +104,21 @@ public class SteamWebAPIClient {
 
 		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CASE);
 		return utility.convertValueToList(response, 2, Friend.class);
+	}
+
+	public PlayerStats getPlayerAchievements(Integer appId, Long steamId, String language) {
+		String interfaceUrl = createEndpointUrl("ISteamUserStats/GetPlayerAchievements/v0001/");
+
+		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
+		parameters.put("appid", String.valueOf(appId));
+		parameters.put("steamid", String.valueOf(steamId));
+		parameters.put("language", String.valueOf(language));
+
+		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
+		System.out.println(response);
+
+		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+		return utility.convertValue(response, PlayerStats.class);
 	}
 
 	private String createEndpointUrl(String interfaceUrl) {
