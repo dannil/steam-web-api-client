@@ -8,6 +8,8 @@ public class PlayerStatsAchievement {
 	private String apiName;
 
 	private boolean achieved;
+	private String name;
+	private String description;
 
 	public PlayerStatsAchievement() {
 		// TODO Auto-generated constructor stub
@@ -29,13 +31,33 @@ public class PlayerStatsAchievement {
 		this.achieved = achieved;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder(128);
-		builder.append("Achievements [apiName=");
+		builder.append("PlayerStatsAchievement [apiName=");
 		builder.append(this.apiName);
 		builder.append(", achieved=");
 		builder.append(this.achieved);
+		builder.append(", name=");
+		builder.append(this.name);
+		builder.append(", description=");
+		builder.append(this.description);
 		builder.append(']');
 		return builder.toString();
 	}
