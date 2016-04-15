@@ -14,10 +14,6 @@ public class PlayerStats {
 
 	private List<PlayerStatsAchievement> achievements;
 
-	public PlayerStats() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Long getSteamId() {
 		return this.steamId;
 	}
@@ -52,7 +48,7 @@ public class PlayerStats {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("PlayerStats [steamId=");
 		builder.append(this.steamId);
 		builder.append(", gameName=");
@@ -61,7 +57,7 @@ public class PlayerStats {
 		builder.append(this.success);
 		builder.append(", achievements=");
 		builder.append(this.achievements);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

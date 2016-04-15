@@ -6,6 +6,10 @@ import java.util.Objects;
 
 public class UrlBuilder {
 
+	private UrlBuilder() {
+
+	}
+
 	public static String build(String interfaceUrl, Map<String, String> parameters) {
 		parameters.put("format", "json");
 

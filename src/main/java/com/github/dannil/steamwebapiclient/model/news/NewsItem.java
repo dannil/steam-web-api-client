@@ -24,10 +24,6 @@ public class NewsItem {
 
 	private String feedName;
 
-	public NewsItem() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public long getGid() {
 		return this.gid;
 	}

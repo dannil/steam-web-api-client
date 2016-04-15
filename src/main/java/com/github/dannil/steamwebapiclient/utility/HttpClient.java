@@ -13,6 +13,10 @@ import com.github.dannil.steamwebapiclient.exception.SteamWebAPIClientException;
 
 public class HttpClient {
 
+	private HttpClient() {
+
+	}
+
 	public static String getResponse(String url) throws SteamWebAPIClientException {
 		StringBuilder builder = new StringBuilder();
 		try (CloseableHttpClient client = HttpClientBuilder.create().build()) {

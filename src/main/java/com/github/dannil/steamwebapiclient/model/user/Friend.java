@@ -17,10 +17,6 @@ public class Friend {
 	@JsonDeserialize(using = UnixTimestampDeserializer.class)
 	private Date friendSince;
 
-	public Friend() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Long getSteamId() {
 		return this.steamId;
 	}

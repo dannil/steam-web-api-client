@@ -29,10 +29,6 @@ public class Player {
 	private String locCountryCode;
 	private Integer locStateCode;
 
-	public Player() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Long getSteamId() {
 		return this.steamId;
 	}

@@ -11,10 +11,6 @@ public class PlayerStatsAchievement {
 	private String name;
 	private String description;
 
-	public PlayerStatsAchievement() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public String getApiName() {
 		return this.apiName;
 	}
