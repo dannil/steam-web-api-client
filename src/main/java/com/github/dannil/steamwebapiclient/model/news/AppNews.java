@@ -3,18 +3,30 @@ package com.github.dannil.steamwebapiclient.model.news;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class AppNews {
 
-	@JsonProperty("appid")
 	private int appId;
 
-	@JsonProperty("newsitems")
-	private List<NewsItem> newsItem;
+	private List<NewsItem> newsItems;
 
 	public AppNews() {
-		this.newsItem = new ArrayList<NewsItem>();
+		this.newsItems = new ArrayList<NewsItem>();
+	}
+
+	public int getAppId() {
+		return this.appId;
+	}
+
+	public void setAppId(int appId) {
+		this.appId = appId;
+	}
+
+	public List<NewsItem> getNewsItems() {
+		return this.newsItems;
+	}
+
+	public void setNewsItems(List<NewsItem> newsItems) {
+		this.newsItems = newsItems;
 	}
 
 	@Override
@@ -23,7 +35,7 @@ public class AppNews {
 		builder.append("AppNews [appId=");
 		builder.append(this.appId);
 		builder.append(", newsItem=");
-		builder.append(this.newsItem);
+		builder.append(this.newsItems);
 		builder.append("]");
 		return builder.toString();
 	}

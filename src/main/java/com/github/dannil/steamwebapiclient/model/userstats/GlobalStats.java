@@ -12,10 +12,10 @@ public class GlobalStats {
 	@JsonProperty("name[0]")
 	private String name;
 
-	@JsonProperty("startdate")
+	// @JsonProperty("startdate")
 	private Date startDate;
 
-	@JsonProperty("enddate")
+	// @JsonProperty("enddate")
 	private Date endDate;
 
 	public Integer getAppId() {

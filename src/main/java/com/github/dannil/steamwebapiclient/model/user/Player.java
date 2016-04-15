@@ -2,16 +2,13 @@ package com.github.dannil.steamwebapiclient.model.user;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.dannil.steamwebapiclient.utility.UnixTimestampDeserializer;
 
 public class Player {
 
-	@JsonProperty("steamid")
 	private Long steamId;
 
-	@JsonProperty("communityvisibilitystate")
 	private Integer communityVisibilityState;
 
 	private Integer profileState;

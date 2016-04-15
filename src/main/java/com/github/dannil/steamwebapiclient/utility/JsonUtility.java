@@ -23,32 +23,43 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.dannil.steamwebapiclient.exception.SteamWebAPIClientException;
 
 /**
- * Utility class for converting JSON to Java objects
+ * Utility class for converting Steam WWeb API JSON responses to Java objects
  */
 public class JsonUtility {
 
-	private static ObjectMapper mapper;
+	private ObjectMapper mapper;
 
-	static {
-		mapper = new ObjectMapper();
+	public static JsonUtility newInstance(PropertyNamingStrategy s) {
+		ObjectMapper objectMapper = new ObjectMapper().setPropertyNamingStrategy(s);
+		return new JsonUtility(objectMapper);
 	}
+
+	private JsonUtility(ObjectMapper objectMapper) {
+		this.mapper = objectMapper;
+	}
+
+	// static {
+	// mapper = new ObjectMapper();
+	// mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+	// }
 
 	private JsonUtility() {
 
 	}
 
-	private static JsonNode readTree(String json) {
+	private JsonNode readTree(String json) {
 		try {
-			return mapper.readTree(json);
+			return this.mapper.readTree(json);
 		} catch (IOException e) {
 			throw new SteamWebAPIClientException(e);
 		}
 	}
 
-	public static <T> T convertValue(String json, Class<T> clazz) {
+	public <T> T convertValue(String json, Class<T> clazz) {
 		JsonNode node = readTree(json);
 
 		Iterator<String> it = node.fieldNames();
@@ -56,23 +67,21 @@ public class JsonUtility {
 
 		node = node.get(first);
 
-		return mapper.convertValue(node, clazz);
+		return this.mapper.convertValue(node, clazz);
 	}
 
-	public static <T> List<T> convertValueToList(String json, Class<T> clazz) {
+	public <T> List<T> convertValueToList(String json, int numberOfElementsToSkip, Class<T> clazz) {
 		JsonNode node = readTree(json);
 
-		Iterator<String> it = node.fieldNames();
-		String first = it.next();
-		node = node.get(first);
+		for (int i = 0; i < numberOfElementsToSkip; i++) {
+			Iterator<String> it = node.fieldNames();
+			String first = it.next();
+			node = node.get(first);
+		}
 
-		it = node.fieldNames();
-		String second = it.next();
-		node = node.get(second);
+		JavaType type = this.mapper.getTypeFactory().constructCollectionType(List.class, clazz);
 
-		JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
-
-		return mapper.convertValue(node, type);
+		return this.mapper.convertValue(node, type);
 	}
 
 }

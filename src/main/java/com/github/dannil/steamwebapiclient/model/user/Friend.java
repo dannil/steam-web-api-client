@@ -8,7 +8,6 @@ import com.github.dannil.steamwebapiclient.utility.UnixTimestampDeserializer;
 
 public class Friend {
 
-	@JsonProperty("steamid")
 	private Long steamId;
 
 	private String relationship;

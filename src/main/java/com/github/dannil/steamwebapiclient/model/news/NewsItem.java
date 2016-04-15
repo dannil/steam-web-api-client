@@ -17,14 +17,11 @@ public class NewsItem {
 
 	private String author;
 	private String contents;
-
-	@JsonProperty("feedlabel")
 	private String feedLabel;
 
 	@JsonDeserialize(using = UnixTimestampDeserializer.class)
 	private Date date;
 
-	@JsonProperty("feedname")
 	private String feedName;
 
 	public NewsItem() {

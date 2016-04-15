@@ -7,9 +7,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.dannil.steamwebapiclient.builder.UrlBuilder;
 import com.github.dannil.steamwebapiclient.exception.SteamWebAPIClientException;
-import com.github.dannil.steamwebapiclient.model.news.NewsItem;
+import com.github.dannil.steamwebapiclient.model.news.AppNews;
 import com.github.dannil.steamwebapiclient.model.user.Friend;
 import com.github.dannil.steamwebapiclient.model.user.Player;
 import com.github.dannil.steamwebapiclient.model.userstats.Achievement;
@@ -34,8 +35,7 @@ public class SteamWebAPIClient {
 		this.defaultParameters.put("key", apiKey);
 	}
 
-	public List<NewsItem> getNewsForApp(Integer appId, Integer count, Integer maxLength)
-			throws SteamWebAPIClientException {
+	public AppNews getNewsForApp(Integer appId, Integer count, Integer maxLength) throws SteamWebAPIClientException {
 		String interfaceUrl = this.baseUrl + "ISteamNews/GetNewsForApp/v0002/";
 
 		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
@@ -45,7 +45,8 @@ public class SteamWebAPIClient {
 
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
 
-		return JsonUtility.convertValueToList(response, NewsItem.class);
+		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CASE);
+		return utility.convertValue(response, AppNews.class);
 	}
 
 	public List<Achievement> getGlobalAchievementPercentagesForApp(Integer gameId) throws SteamWebAPIClientException {
@@ -56,7 +57,8 @@ public class SteamWebAPIClient {
 
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
 
-		return JsonUtility.convertValueToList(response, Achievement.class);
+		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CASE);
+		return utility.convertValueToList(response, 2, Achievement.class);
 	}
 
 	// public List<GlobalStats> getGlobalStatsForGame(Integer appId, Integer count, String name,
@@ -86,7 +88,8 @@ public class SteamWebAPIClient {
 
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
 
-		return JsonUtility.convertValueToList(response, Player.class);
+		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CASE);
+		return utility.convertValueToList(response, 2, Player.class);
 	}
 
 	public List<Friend> getFriendsList(Long steamId, String relationship) throws SteamWebAPIClientException {
@@ -98,7 +101,8 @@ public class SteamWebAPIClient {
 
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
 
-		return JsonUtility.convertValueToList(response, Friend.class);
+		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CASE);
+		return utility.convertValueToList(response, 2, Friend.class);
 	}
 
 	private String createEndpointUrl(String interfaceUrl) {
