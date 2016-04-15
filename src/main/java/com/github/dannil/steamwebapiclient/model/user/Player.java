@@ -163,7 +163,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(256);
 		builder.append("Player [steamId=");
 		builder.append(this.steamId);
 		builder.append(", communityVisibilityState=");
@@ -196,7 +196,7 @@ public class Player {
 		builder.append(this.locCountryCode);
 		builder.append(", locStateCode=");
 		builder.append(this.locStateCode);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

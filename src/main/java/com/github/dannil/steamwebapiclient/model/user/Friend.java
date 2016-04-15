@@ -47,14 +47,14 @@ public class Friend {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("Friend [steamId=");
 		builder.append(this.steamId);
 		builder.append(", relationship=");
 		builder.append(this.relationship);
 		builder.append(", friendSince=");
 		builder.append(this.friendSince);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

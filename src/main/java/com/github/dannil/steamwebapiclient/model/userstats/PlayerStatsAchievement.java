@@ -6,7 +6,7 @@ public class PlayerStatsAchievement {
 
 	@JsonProperty("apiname")
 	private String apiName;
-	
+
 	private boolean achieved;
 
 	public PlayerStatsAchievement() {
@@ -31,12 +31,12 @@ public class PlayerStatsAchievement {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("Achievements [apiName=");
 		builder.append(this.apiName);
 		builder.append(", achieved=");
 		builder.append(this.achieved);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

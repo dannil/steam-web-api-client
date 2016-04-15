@@ -102,7 +102,7 @@ public class NewsItem {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("NewsItem [gid=");
 		builder.append(this.gid);
 		builder.append(", title=");
@@ -121,7 +121,7 @@ public class NewsItem {
 		builder.append(this.date);
 		builder.append(", feedName=");
 		builder.append(this.feedName);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

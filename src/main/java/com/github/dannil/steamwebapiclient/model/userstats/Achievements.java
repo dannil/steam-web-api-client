@@ -23,12 +23,12 @@ public class Achievements {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("Achievements [name=");
 		builder.append(this.name);
 		builder.append(", percent=");
 		builder.append(this.percent);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

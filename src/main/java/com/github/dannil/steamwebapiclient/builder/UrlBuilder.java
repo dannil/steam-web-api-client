@@ -15,7 +15,7 @@ public class UrlBuilder {
 		for (Entry<String, String> entry : parameters.entrySet()) {
 			if (!Objects.equals(entry.getValue(), "null")) {
 				builder.append(entry.getKey());
-				builder.append("=");
+				builder.append('=');
 				builder.append(entry.getValue());
 				if (i < parameters.size() - 1) {
 					builder.append('&');

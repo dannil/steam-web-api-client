@@ -60,7 +60,7 @@ public class GlobalStats {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("GlobalStats [appId=");
 		builder.append(this.appId);
 		builder.append(", count=");
@@ -71,7 +71,7 @@ public class GlobalStats {
 		builder.append(this.startDate);
 		builder.append(", endDate=");
 		builder.append(this.endDate);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 

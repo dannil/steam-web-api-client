@@ -31,12 +31,12 @@ public class AppNews {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder(128);
 		builder.append("AppNews [appId=");
 		builder.append(this.appId);
 		builder.append(", newsItem=");
 		builder.append(this.newsItems);
-		builder.append("]");
+		builder.append(']');
 		return builder.toString();
 	}
 
