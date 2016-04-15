@@ -1,13 +1,17 @@
 package com.github.dannil.steamwebapiclient;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.github.dannil.steamwebapiclient.builder.UrlBuilder;
 import com.github.dannil.steamwebapiclient.exception.SteamWebAPIClientException;
 import com.github.dannil.steamwebapiclient.model.news.NewsItem;
 import com.github.dannil.steamwebapiclient.model.user.Friend;
+import com.github.dannil.steamwebapiclient.model.user.Player;
 import com.github.dannil.steamwebapiclient.model.userstats.Achievement;
 import com.github.dannil.steamwebapiclient.utility.HttpClient;
 import com.github.dannil.steamwebapiclient.utility.JsonUtility;
@@ -74,6 +78,17 @@ public class SteamWebAPIClient {
 	// return JsonUtility.convertValueToList(response, GlobalStats.class);
 	// }
 
+	public List<Player> getPlayerSummaries(Collection<Long> steamIds) {
+		String interfaceUrl = createEndpointUrl("ISteamUser/GetPlayerSummaries/v0002/");
+
+		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
+		parameters.put("steamids", StringUtils.join(steamIds, ','));
+
+		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
+
+		return JsonUtility.convertValueToList(response, Player.class);
+	}
+
 	public List<Friend> getFriendsList(Long steamId, String relationship) throws SteamWebAPIClientException {
 		String interfaceUrl = this.baseUrl + "ISteamUser/GetFriendList/v0001/";
 
@@ -84,6 +99,10 @@ public class SteamWebAPIClient {
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
 
 		return JsonUtility.convertValueToList(response, Friend.class);
+	}
+
+	private String createEndpointUrl(String interfaceUrl) {
+		return this.baseUrl + interfaceUrl;
 	}
 
 }
