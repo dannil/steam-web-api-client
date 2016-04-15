@@ -36,7 +36,7 @@ public class SteamWebAPIClient {
 	}
 
 	public AppNews getNewsForApp(Integer appId, Integer count, Integer maxLength) throws SteamWebAPIClientException {
-		String interfaceUrl = this.baseUrl + "ISteamNews/GetNewsForApp/v0002/";
+		String interfaceUrl = createEndpointUrl("ISteamNews/GetNewsForApp/v0002/");
 
 		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
 		parameters.put("appid", String.valueOf(appId));
@@ -50,7 +50,7 @@ public class SteamWebAPIClient {
 	}
 
 	public List<Achievement> getGlobalAchievementPercentagesForApp(Integer gameId) throws SteamWebAPIClientException {
-		String interfaceUrl = this.baseUrl + "ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/";
+		String interfaceUrl = createEndpointUrl("ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/");
 
 		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
 		parameters.put("gameid", String.valueOf(gameId));
@@ -93,7 +93,7 @@ public class SteamWebAPIClient {
 	}
 
 	public List<Friend> getFriendsList(Long steamId, String relationship) throws SteamWebAPIClientException {
-		String interfaceUrl = this.baseUrl + "ISteamUser/GetFriendList/v0001/";
+		String interfaceUrl = createEndpointUrl("ISteamUser/GetFriendList/v0001/");
 
 		Map<String, String> parameters = new HashMap<String, String>(this.defaultParameters);
 		parameters.put("steamid", String.valueOf(steamId));
