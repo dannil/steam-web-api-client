@@ -115,7 +115,6 @@ public class SteamWebAPIClient {
 		parameters.put("language", String.valueOf(language));
 
 		String response = HttpClient.getResponse(UrlBuilder.build(interfaceUrl, parameters));
-		System.out.println(response);
 
 		JsonUtility utility = JsonUtility.newInstance(PropertyNamingStrategy.LOWER_CAMEL_CASE);
 		return utility.convertValue(response, PlayerStats.class);
