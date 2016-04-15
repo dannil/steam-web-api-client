@@ -23,8 +23,7 @@ public class UrlBuilder {
 			}
 			i++;
 		}
-		System.out.println(builder.toString());
-
+		// System.out.println(builder.toString());
 		return builder.toString();
 	}
 
