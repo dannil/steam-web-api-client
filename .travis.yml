@@ -8,17 +8,13 @@ branches:
   only:
   - master
   - dev
-  - coverity_scan
-  
 sudo: required
-  
+before_install:
+- mvn org.codehaus.mojo:versions-maven-plugin:display-dependency-updates
+- mvn org.codehaus.mojo:versions-maven-plugin:display-plugin-updates
 after_success:
-  - mvn jacoco:report
-  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
-  - sudo sh jpmInstall.sh
-  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
-  - codacy-coverage-reporter -l Java -r target/site/jacoco/jacoco.xml --projectToken $CODACY_PROJECT_TOKEN
-  
+- mvn com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DprojectToken=$CODACY_PROJECT_TOKEN -DapiToken=$CODACY_API_TOKEN -DcodacyApiBaseUrl=https://api.codacy.com
 env:
   global:
-    secure: ofEkkHQ6uRC4PLKYV2UocHPmgpbdZIyX2HUglenQOXzkT4RUA39t3XBJxDEKYe95U1UfPOo1kLaAmVvnQcfmIsm/vB9xet8PNTODowKltMhNcK5oyy58iGkwR/Klep4b0mWYUh3w39LdgnOzQ6nra3Hap7B4bMZ8bPNiVLxp4/A=
+   - secure: "VQIpnwJdP8OELpSOYo8R9EROfBWGVEXtR4IHw9WrftFecp2VjL0sm5hncBofK+TjpPF57x4qjoaZP8mzq2q+2CSB/WFD7stpTnFZkz698dru5MSHd8weNKkyrQRlx9I7kJPLO99bXUXZUoPzkwYrKgxFQnRgmym98Lt99EH3wdKwgZLiK1TYNtSJGiwKMOrZvBNZeUFxChQZlz038Zq9myIFiIYZjbwypQdxi2R73iqn3R8Qa3PusM1pllhRRCkRE4gt8IqpqgIRZbDMWYkeBR2E4l4l43nJdmNnw3pdntz3EPLY0QZd/98dNPpwJFIuNJ466pL66WDYrxsEmTx7lhbfgjJgeMfl+F4EsVzJglLtg7aNboKWoM6lM6ic4yXfsDgHjDAewlJ6xxzosym3KMBh+ZZ3saoy0RAAaXCVPATzeTOPtG3m8I+LrNnNeNnmD+f1OUXAGwH/gFLP/FLWfLjsaJf2Qrum2kR06E4mr7iRusD9zp61V/TZTIVUOMhyH1PD+XzB4BAoUC3FEbuSn8zo0WhLCfPVDGSTPMs7b0C+FzDt354to4cciq5Z2P1RtgxZv6d2tmcjJj7OIeFu6lx/UrIMnvBlGvbPVduTbBLyv7EhEwiw8mOZ3hyxf4eQzGhzhLOZPxsoPpWGHG8x1kj0Y4QlPTAqZEaOjuZ6o5Y="   
+   - secure: "WdL49OALGC7sRC/8ad6jq+pl/4h8B7Y6wknuLal8/ZDarMgT/Fjr08CkcTB17DghXlVGfZ5b4aFCcJcaJyl+YNaa0z+CwbVl3eQvJSxS4MZYZki55XVMS2rBkATpf1etTosKpZpjESLUn2Z6AO+e9GH6Zsw6zfJ1FqgsMg0eRSyHjRh6seFCeeFyT3DL15//bFTwFTZuQvjLzJWWXXwpr9y/dO08b58sQNPw3fISNpVm/fyRn3oYdW281OZj+cd2hs2MmtKJOdOiYef0SZLjTI1uncbbI8VQN1LTnNI0ke+TylVHzPLQL7ftca6awOgtqxq0Qov9AJX30nEXaEldDQXUzzzGSCf3A6E/0fKyAUIeZDSGZWJDO23We+kS7q2sy9V6b9r3Kd3oPOZf8sEA0qYg6IAIX+L0LYwpPLwF8XmM2MX5LE+6QWwUtM5RH7RLMu96BJquFGKPphT7J0mmslAGjfzfw6A39CA9LMHP4d+PSq8Dvsux0i/9Q6hDoKf+NnAQnKQPzBCGJMpcea6QFuvJ9LwO1GwinSmeQVvAgtbzjILUuOl03MVmO59ORAj4U/T2YtkY0b6hk6dH4u5gXhUDVQ0vEhd4nx6wfiLFN2b8a6MYyPfPfKQN+A/wQQxxK2O0TyZIizYlsga9vwtNbXwQqQjj9sMHk7Ay1Fsb624="
